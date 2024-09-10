@@ -72,7 +72,9 @@ CAREFUL : Ip addresses range on one interface must not overlapp on the other ow 
 ### Routing table 
 
 Declares the routes to network destinations. Destination to (default 0.0.0.0/0, when no other route is available for an IP destination address) -> next hop (IP adress of the next router on the packet's way)
+For eg, destination default is equivalent to 0.0.0.0/0, which will send the packets indiscriminately to the first network address it encounters. A destination address of 122.3.5.3/24 would send the packets to the network 122.3.5.0.
+The **next hop** is the IP address of the next router (or internet) interface to which the interface of the current machine must send its packets. 
 
+## Exo notes
 
-
-
+/24 subnet mask is equivalent to 255.255.255.0.

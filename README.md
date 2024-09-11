@@ -35,6 +35,8 @@ Because :
 - The third bits: 1 AND 0 = 0
 - The fourth bits: 0 AND 0 = 0
 
+=> For eg, if the destination IP address is 40.178.145.227/25 then it means we have an address in the network with a subnet mask of /25, which means the first 25 bits of the address define the network portion, and the remaining bits define the host portion.
+
 ## Range of host addresses
 
 IP address | 01101000.11000110.11110001.01111101

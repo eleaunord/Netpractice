@@ -77,6 +77,27 @@ Declares the routes to network destinations. Destination to (default 0.0.0.0/0, 
 For eg, destination default is equivalent to 0.0.0.0/0, which will send the packets indiscriminately to the first network address it encounters. A destination address of 122.3.5.3/24 would send the packets to the network 122.3.5.0.
 The **next hop** is the IP address of the next router (or internet) interface to which the interface of the current machine must send its packets. 
 
+## Subnetting
+
+Step 1: Understand the structure of a /28 subnet
+
+     A /28 subnet mask corresponds to 28 bits for the network portion and 4 bits for the host portion.
+
+    In binary, the subnet mask for /28 looks like this:
+
+    scss
+
+11111111.11111111.11111111.11110000 (255.255.255.240)
+
+This means that the last 4 bits are for the host addresses, giving 24=1624=16 addresses per subnet.
+
+Out of these 16 addresses:
+
+    1 is the network address (first address in the range, where all host bits are 0),
+    1 is the broadcast address (last address in the range, where all host bits are 1),
+    So, 14 addresses are available for hosts.
 ## Exo notes
 
 /24 subnet mask is equivalent to 255.255.255.0.
+
+

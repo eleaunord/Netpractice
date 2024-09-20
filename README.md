@@ -1,3 +1,6 @@
+
+Run html file with : python -m http.server
+
 NB : ex06 to ex10 at the exam
 
 ## How TCP addressing works

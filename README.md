@@ -137,7 +137,10 @@ For a /28 subnet mask, the number of IP addresses in each subnet is 2(32−28)=1
     Fourth subnet: 93.198.14.64 - 93.198.14.79
 ## Exo notes
 
-/24 subnet mask is equivalent to 255.255.255.0.
+/24 subnet mask is equivalent to 255.255.255.0
+
+![image](https://github.com/user-attachments/assets/12736457-1fab-4162-889f-78f22d647585)
+
 
 Exo 9 : since client D’s route is handled by a general default route, it doesn’t need to be explicitly listed in the routing table.
 

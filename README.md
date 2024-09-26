@@ -153,6 +153,9 @@ For a /28 subnet mask, the number of IP addresses in each subnet is 2(32−28)=1
 
 ![image](https://github.com/user-attachments/assets/688c66d0-2918-45ff-9d3e-862073d477f8)
 
+![image](https://github.com/user-attachments/assets/b3fcdc92-33a5-41f5-8914-9e3433b746e4)
+
+
 </details>
 
 

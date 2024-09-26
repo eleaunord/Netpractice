@@ -147,6 +147,16 @@ For a /28 subnet mask, the number of IP addresses in each subnet is 2(32−28)=1
 
 </details>
 
+<details open>
+<summary>Level 9</summary>
+<br>
+
+![image](https://github.com/user-attachments/assets/688c66d0-2918-45ff-9d3e-862073d477f8)
+
+</details>
+
+
+
 Exo 9 : since client D’s route is handled by a general default route, it doesn’t need to be explicitly listed in the routing table.
 
 

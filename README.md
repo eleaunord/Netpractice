@@ -1,148 +1,151 @@
+# NetPractice – Learn Networking by Doing
 
-Run html file with : python -m http.server
+## 📋 Project Description
 
-NB : ex06 to ex10 at the exam
+**NetPractice** is a browser-based interactive training project aimed at teaching the **basics of networking** through configuration challenges. The goal is to understand how TCP/IP works, practice subnetting, and manage routing between devices like switches and routers.
 
-## How TCP addressing works
+> To run the training interface:
 
-TCP = Transmission Control Protocol. Used so that application programs and devices can exchange messages over a network. Send "packets" (small segment of larger messages) across the internet.
-Using TCP, we can make sure that the entire data is being communicated over a network. Before any data transmission, TCP first establishes a connection between a source and its destination. This connection remains active until communication begins. 
+```bash
+python3 -m http.server
+```
 
-## How IP addressing works
+> 📌 Note: Levels **ex06 to ex10** are particularly relevant for exams!
 
-IP = Internet Protocol. Part of the internet protocol suite that also includes TCP. Usually known together as TCP/IP. Governs rules for packetizing, adressing, etc. 
-Used to assign addresses to devices on a network. Each device connected to the internet requires a unique IP address. 
+---
 
-Two parts of the IP adress : 1/ host 2/ network it belongs to.
+## 🧠 What I Learned
 
-These two parts are distingues by a subnet mask.
+### How TCP Addressing Works
 
-## Subnet mask
+* **TCP (Transmission Control Protocol)** ensures reliable data transfer by breaking data into packets and managing their delivery.
+* Before transmission, TCP establishes a connection between the source and the destination and keeps it alive until the communication ends.
 
-A 32 bits/4 bytes address. Calculated using bitwise AND. 
+### How IP Addressing Works
 
-IP address | 01101000.11000110.11110001.01111101
-Mask       | 11111111.11111111.11111111.10000000
+* **IP (Internet Protocol)** assigns unique addresses to devices across a network.
+* Each IP address consists of:
 
-Network address | 01101000.11000110.11110001.00000000
-Which translates to a network address of 104.198.241.0.
+  * **Network portion**
+  * **Host portion**
+* These parts are separated using a **subnet mask**.
 
-NB : Bitwise AND
-Compares each bit in the corresponding pos of 2 binary nums.
-- Input 1: 1010
-- Input 2: 1100
-- Result: 1000
-Because :
-- The leftmost bits: 1 AND 1 = 1
-- The second bits: 0 AND 1 = 0
-- The third bits: 1 AND 0 = 0
-- The fourth bits: 0 AND 0 = 0
+---
 
-=> For eg, if the destination IP address is 40.178.145.227/25 then it means we have an address in the network with a subnet mask of /25, which means the first 25 bits of the address define the network portion, and the remaining bits define the host portion.
+## Subnet Mask & Binary AND
 
-## Range of host addresses
+A **subnet mask** is a 32-bit value that distinguishes the network and host parts of an IP address using a **bitwise AND** operation.
 
-IP address | 01101000.11000110.11110001.01111101
-Mask       | 11111111.11111111.11111111.1**0000000**
+Example:
 
-Possible range = **last** bits of the mask
+```
+IP address : 01101000.11000110.11110001.01111101
+Mask       : 11111111.11111111.11111111.10000000
+Result     : 01101000.11000110.11110001.00000000 → 104.198.241.0
+```
 
-BINARY  | 0000000 - 1111111
-DECIMAL | 0 - 127
+📌 **/25 subnet** means:
 
-BUT range extremities reserved for specific uses
+* First 25 bits = network
+* Last 7 bits = host
+* Usable range: 104.198.241.1 to 104.198.241.126
 
-104.198.241.0   | Reserved to represent the network address.
-104.198.241.127 | Reserved as the broadcast address; used to send packets to all hosts of a network.
+---
 
-So our range of possible IP addresses becomes 104.198.241.0 - 104.198.241.126
+## 💡 Range of Host Addresses
 
-CIDR notation (using /)
-255.255.255.128 in binary is:
-11111111.11111111.11111111.10000000
-In this binary representation:
-- The 1s represent the network portion of the address.
-- The 0s represent the host portion of the address.
-In this case, there are 25 ones (1s) followed by 7 zeros (0s). so /25 in CIDR notation
+From:
 
-## Switch
+```
+104.198.241.0 → reserved (network)
+104.198.241.127 → reserved (broadcast)
+```
 
-Connects mult devices together in a single network. ONly distributes packets to its local network. Cannot talk directly to a network outside of its own.
+➡️ Usable: **104.198.241.1 to 104.198.241.126**
 
-## Router
+---
 
-Connects mult devices together like a switch but can connect mutiplie networks together. Has an interface for each network it connects to. 
-CAREFUL : Ip addresses range on one interface must not overlapp on the other ow it will mean that they're on the same network. 
+## 🔀 CIDR Notation (Classless Inter-Domain Routing)
 
-### Routing table 
+CIDR represents subnet masks like:
 
-Declares the routes to network destinations. Destination to (default 0.0.0.0/0, when no other route is available for an IP destination address) -> next hop (IP adress of the next router on the packet's way)
-For eg, destination default is equivalent to 0.0.0.0/0, which will send the packets indiscriminately to the first network address it encounters. A destination address of 122.3.5.3/24 would send the packets to the network 122.3.5.0.
-The **next hop** is the IP address of the next router (or internet) interface to which the interface of the current machine must send its packets. 
+```
+/25 = 255.255.255.128 = 11111111.11111111.11111111.10000000
+```
 
-## Subnetting
+* `1` bits → network
+* `0` bits → host
 
-Step 1: Understand the structure of a /28 subnet
+---
 
-     A /28 subnet mask corresponds to 28 bits for the network portion and 4 bits for the host portion.
+## 🔌 Network Devices
 
-    In binary, the subnet mask for /28 looks like this:
+### 🖧 Switch
 
-    scss
+* Connects multiple devices within **one** local network.
+* Forwards packets **within** its network only.
 
-11111111.11111111.11111111.11110000 (255.255.255.240)
+### 🌐 Router
 
-This means that the last 4 bits are for the host addresses, giving 24=1624=16 addresses per subnet.
+* Connects multiple networks.
+* Requires separate interfaces for each network.
+* Interfaces **must not overlap** in address ranges.
 
-Out of these 16 addresses:
+---
 
-    1 is the network address (first address in the range, where all host bits are 0),
-    1 is the broadcast address (last address in the range, where all host bits are 1),
-    So, 14 addresses are available for hosts.
+## 📘 Routing Table Basics
 
-A /28 subnet mask means that the last 4 bits of the IP address are used for host addresses. This gives a total of 24=1624=16 IP addresses per subnet. Out of these 16 addresses, 1 is reserved for the network address and 1 is reserved for the broadcast address, leaving 14 usable addresses for hosts.
+Used to direct packets:
 
-Each subnet is 16 IP addresses long, so the next subnet starts right after the previous one. Here's the detailed breakdown of what this means:
-Explanation:
+```
+Destination: 0.0.0.0/0 (default route)
+Next hop  : IP address of the next router or gateway
+```
 
-    First subnet:
-        Network address: 93.198.14.0/28
-        Usable addresses: 93.198.14.1 to 93.198.14.14
-        Broadcast address: 93.198.14.15
-        Since this subnet contains the first 16 addresses (from 93.198.14.0 to 93.198.14.15), the next subnet will start at 93.198.14.16.
+Example:
 
-    Second subnet:
-        Network address: 93.198.14.16/28
-        Usable addresses: 93.198.14.17 to 93.198.14.30
-        Broadcast address: 93.198.14.31
-        After this range, the next subnet starts at 93.198.14.32.
+```
+122.3.5.3/24 → Network 122.3.5.0
+```
 
-Skipping ahead:
+---
 
-If you follow this logic and continue incrementing by 16 addresses, you’ll eventually reach the subnet starting at 93.198.14.64:
+## 🧮 Subnetting
 
-    Fourth subnet:
-        Network address: 93.198.14.64/28
-        Usable addresses: 93.198.14.65 to 93.198.14.78
-        Broadcast address: 93.198.14.79
+### What is /28?
 
-In this case, the second subnet you're using (93.198.14.65 - 93.198.14.78) is part of the fourth /28 subnet, which begins at 93.198.14.64.
-Why 16 Addresses?
+* 255.255.255.240 → 11111111.11111111.11111111.11110000
+* 4 bits for host = 2⁴ = 16 IPs per subnet
 
-For a /28 subnet mask, the number of IP addresses in each subnet is 2(32−28)=162(32−28)=16. That means every new subnet starts at the next multiple of 16. Here’s how the subnets increment:
+Out of 16:
 
-    First subnet: 93.198.14.0 - 93.198.14.15
-    Second subnet: 93.198.14.16 - 93.198.14.31
-    Third subnet: 93.198.14.32 - 93.198.14.47
-    Fourth subnet: 93.198.14.64 - 93.198.14.79
-## Exo notes
+* 1 = network address
+* 1 = broadcast address
+* 14 = usable for hosts
 
-/24 subnet mask is equivalent to 255.255.255.0
+### Subnet Examples:
+
+* **1st subnet**: 93.198.14.0/28 → 93.198.14.1 – 93.198.14.14
+* **2nd subnet**: 93.198.14.16/28 → 93.198.14.17 – 93.198.14.30
+* **4th subnet**: 93.198.14.64/28 → 93.198.14.65 – 93.198.14.78
+
+Each subnet increments by 16.
+
+---
+
+## Exo Notes
+
+* **/24** = 255.255.255.0
+* **Client D** doesn't require explicit routing entry if it relies on the router's **default route**.
+
+---
+
+## 📷 Visual References
 
 <details open>
 <summary>Level 8</summary>
 <br>
-     
+
 ![image](https://github.com/user-attachments/assets/12736457-1fab-4162-889f-78f22d647585)
 
 </details>
@@ -155,11 +158,26 @@ For a /28 subnet mask, the number of IP addresses in each subnet is 2(32−28)=1
 
 ![image](https://github.com/user-attachments/assets/b3fcdc92-33a5-41f5-8914-9e3433b746e4)
 
-
 </details>
 
+---
 
+## ⚙️ Difficulties Faced
 
-Exo 9 : since client D’s route is handled by a general default route, it doesn’t need to be explicitly listed in the routing table.
+* Getting used to **CIDR notation** and converting subnet masks to binary.
+* Understanding how subnet boundaries work (especially with /28).
+* Figuring out **why certain routes failed** due to overlapping ranges or missing next hops.
+* Interpreting **routing tables** and making sense of how the next hop IP should be chosen.
+* Remembering to avoid **broadcast** and **network addresses** when assigning IPs.
 
+---
 
+## 🎯 Final Thoughts
+
+NetPractice provided me with a **hands-on introduction to networking**, including:
+
+* How addressing and routing work in real scenarios.
+* Practical application of subnetting logic.
+* Debugging and validating network setups.
+
+It’s an intuitive and fun way to understand what’s happening behind the scenes when devices communicate over the internet.
